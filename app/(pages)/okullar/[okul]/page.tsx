@@ -10,6 +10,7 @@ import { FindSchoolOnSlug } from "@/app/lib/okul"
 
 import { schoolTypes } from "@/app/schoolType"
 import "./okul.css"
+import { Session, UserMetadata } from "@supabase/supabase-js"
 
 // Örnek okul verisi
 
@@ -26,6 +27,7 @@ export default function OkulDetay() {
   const schoolSlugUrl= pathname.split('/')[2]
   const [schoolData,setSchoolData] = useState<schoolTypes | null>(null)
   const [okulBulunamadı,setOkulBulunamadı] = useState(false)
+  const [user,setUser] = useState<UserMetadata | null>()
 
 
   async function GetSchoolUrl(url:string){
@@ -40,8 +42,12 @@ export default function OkulDetay() {
     }
   }
   
+  
+  
+  
   useEffect(()=>{
     GetSchoolUrl(schoolSlugUrl)
+    
     
   },[pathname])
 

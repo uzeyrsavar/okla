@@ -7,6 +7,12 @@ import { okulAra } from '@/app/lib/okul'
 import { useRouter } from 'next/navigation'
 import './okul-search.css'
 
+import { Session, UserMetadata } from "@supabase/supabase-js"
+import { Metadata } from "next"
+
+
+
+
 // İl listesi (örnek)
 const IL_LISTESI = [
   'Adana', 'Adıyaman', 'Afyonkarahisar', 'Ağrı', 'Amasya', 'Ankara', 'Antalya', 'Artvin',
@@ -72,6 +78,8 @@ const ChevronDownIcon = () => (
   </svg>
 )
 
+
+
 interface Filters {
   text: string
   il: string
@@ -87,6 +95,10 @@ interface Okul {
   ILCE_ADI: string
   KURUM_TUR_ADI: string
 }
+
+ 
+
+
 
 const Loading = () => null
 
@@ -104,9 +116,14 @@ export default function OkulSearchPage() {
   const [totalCount, setTotalCount] = useState(0)
   const [loading, setLoading] = useState(false)
   const [initialLoad, setInitialLoad] = useState(true)
+  const [user,setUser] = useState<UserMetadata| null>()
 
   const router = useRouter()
   const searchParams = useSearchParams()
+
+
+    
+   
 
   // Veri cekme fonksiyonu
   const fetchData = useCallback(async (reset = false) => {
