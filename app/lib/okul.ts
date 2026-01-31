@@ -55,8 +55,8 @@ export async function okulAra({
     query = query.ilike("slug", `%${slugify(text)}%`);
   }
 
-  if (il) query = query.eq("IL_ADI", il);
-  if (ilce) query = query.eq("ILCE_ADI", ilce);
+  if (il) query = query.ilike("IL_ADI", il);
+  if (ilce) query = query.ilike("ILCE_ADI", `%${ilce.trim()}%`);
   if (tur) query = query.eq("KURUM_TUR_ADI", tur);
 
   const { data, count, error } = await query;

@@ -1,12 +1,30 @@
 'use client'
-import { useRouter } from "next/navigation";
+
+import { useRouter } from "next/navigation"
+import { supabase } from "./lib/supabase"
+import { useEffect, useState } from "react"
 
 export default function Home() {
   const router = useRouter()
-  return (
-    <div>
-      Hoşgeldiniz
-      <button onClick={()=> router.push('/giris')}>Giriş Yap</button>
-    </div>
-  );
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data } = await supabase.auth.getUser()
+
+      if (data?.user) {
+        router.replace('/home')
+      } else {
+        router.replace('/dashboard')
+      }
+
+      setLoading(false)
+    }
+
+    checkUser()
+  }, [])
+
+  if (loading) return <div>Yükleniyor...</div>
+
+  return null
 }
