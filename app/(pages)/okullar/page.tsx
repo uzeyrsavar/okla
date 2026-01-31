@@ -1,5 +1,5 @@
-'use client'
 export const dynamic = 'force-dynamic'
+
 import React, { useCallback, useEffect, useState } from "react"
 import { Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
