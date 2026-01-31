@@ -1,5 +1,5 @@
 'use client'
-
+export const dynamic = 'force-dynamic'
 import { useEffect, useState } from "react"
 import { SchoolHeader } from "@/app/components/schoolComp/school-header"
 import { SchoolInfo } from "@/app//components/schoolComp/school-info"
